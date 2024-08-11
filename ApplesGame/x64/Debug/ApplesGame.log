@@ -1,0 +1,16 @@
+﻿  Apples.cpp
+  Game.cpp
+  GameMain.cpp
+C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\Game.cpp(91,19): error C2039: "Shape": не является членом "ApplesGame::Apples".
+C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\Game.cpp(92,31): error C2039: "Shape": не является членом "ApplesGame::Apples".
+C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\Game.cpp(97,18): error C2039: "Shape": не является членом "ApplesGame::Rocks".
+C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\Game.cpp(98,30): error C2039: "Shape": не является членом "ApplesGame::Rocks".
+C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\GameMain.cpp(30,18): error C2371: playerDirection: переопределение; различные базовые типы
+  Math.cpp
+  Player.cpp
+  Rocks.cpp
+C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\Rocks.cpp(9,9): error C2039: "Shape": не является членом "ApplesGame::Rocks".
+C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\Rocks.cpp(10,9): error C2039: "Shape": не является членом "ApplesGame::Rocks".
+C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\Rocks.cpp(11,9): error C2039: "Shape": не является членом "ApplesGame::Rocks".
+C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\Rocks.cpp(12,9): error C2039: "Shape": не является членом "ApplesGame::Rocks".
+  Создание кода...
