@@ -9,8 +9,4 @@ C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\GameMain.cpp(30,18): error C237
   Math.cpp
   Player.cpp
   Rocks.cpp
-C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\Rocks.cpp(9,9): error C2039: "Shape": не является членом "ApplesGame::Rocks".
-C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\Rocks.cpp(10,9): error C2039: "Shape": не является членом "ApplesGame::Rocks".
-C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\Rocks.cpp(11,9): error C2039: "Shape": не является членом "ApplesGame::Rocks".
-C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\Rocks.cpp(12,9): error C2039: "Shape": не является членом "ApplesGame::Rocks".
   Создание кода...

@@ -88,13 +88,13 @@ namespace ApplesGame
 		DrawPlayer(game.player,window);
 		for (int i = 0;i < NUM_APPLES;++i)
 		{
-			game.apples[i].Shape.setPosition(game.apples[i].Position.x, game.apples[i].Position.y);
+			game.apples[i].setPosition(game.apples[i].Position.x, game.apples[i].Position.y);
 			window.draw(game.apples[i].Shape);
 		}
 		
 		for (int i = 0;i < ROCKS_NUM;++i)
 		{
-			game.rocks[i].Shape.setPosition(game.rocks[i].Position.x, game.rocks[i].Position.y);
+			game.rocks[i].setPosition(game.rocks[i].Position.x, game.rocks[i].Position.y);
 			window.draw(game.rocks[i].Shape);
 		}
 		window.draw(game.player.sprite);

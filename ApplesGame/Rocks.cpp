@@ -1,18 +1,21 @@
 #include "Rocks.h"
+#include "Game.h"
+using namespace std;
+using namespace sf;
 namespace ApplesGame
 {
 
 
-	void ApplesGame::InitRocks(Rocks& rocks)
+	void InitRocks(Rocks& rocks, const Game& game)
 	{
 		rocks.Position = GetRandPositionInScreen(SCREEN_WIDHTH, SCREEN_HEIGHT);
-		rocks.Shape.setSize(Vector2f(ROCKS_SIZE, ROCKS_SIZE));
-		rocks.Shape.setFillColor(Color::Yellow);
-		rocks.Shape.setOrigin(APPLES_SIZE / 2.f, APPLES_SIZE / 2.f);
-		rocks.Shape.setPosition(rocks.Position.x, rocks.Position.y);
+		rocks.sprite.setTexture(game.applesTexture);
 
 	}
 	void DrawRocks(Rocks& rocks, RenderWindow& window)
 	{
+		rocks.sprite.setPosition(rocks.Position.x, rocks.Position.y);
+		window.draw(rocks.sprite);
+
 	}
 }
