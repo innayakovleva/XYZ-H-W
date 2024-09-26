@@ -1,6 +1,7 @@
 #include "Game.h"
 #include <cassert>
 #include "Player.cpp"
+
 namespace ApplesGame
 {
 	 /**void RestartGame(Game& game)
@@ -19,6 +20,12 @@ namespace ApplesGame
 		
 
 	}/**/
+	void StartPlayingState(Game& game)
+	{
+		SetPlayerPosition(game.player, { SCREEN_WIDHTH / 2.f, SCREEN_HEIGHT / 2.f });
+		SetPlayerSpeed(game.player, INITIAL_SPEED);
+		SetPlayerDirection(game.player, PlayerDirection::Right);
+	}
 
 	void InitGame(Game& game)
 	{
@@ -28,6 +35,8 @@ namespace ApplesGame
 		assert(game.rocksTexture.loadFromFile(RESOURCES_PATH + "\\Rock.png"));
 		assert(game.eatApplesSoundBuffer.loadFromFile(RESOURCES_PATH + "\\AppleEat.wav"));
 		assert(game.gameOverSoundBuffer.loadFromFile(RESOURCES_PATH + "\\Death.wav"));
+		assert(game.font.loadFromFile(RESOURCES_PATH + "\\Fonts\\Roboto-Bold.ttf"));
+
 
 		// Init game objects
 		game.screenRect = { 0.f, 0.f, SCREEN_WIDHTH, SCREEN_HEIGHT };
@@ -56,10 +65,97 @@ namespace ApplesGame
 		// Init sounds
 		game.ApplesEatSound.setBuffer(game.eatApplesSoundBuffer);
 		game.DeathSound.setBuffer(game.gameOverSoundBuffer);
-	
+
+		// Init texts
+		game.scoreText.setFont(game.font);
+		game.scoreText.setCharacterSize(20);
+		game.scoreText.setFillColor(sf::Color::White);
+		game.scoreText.setPosition(20.f, 10.f);
+
+		game.controlsHintText.setFont(game.font);
+		game.controlsHintText.setCharacterSize(20);
+		game.controlsHintText.setFillColor(sf::Color::White);
+		game.controlsHintText.setString("Use arrows to move, ESC to exit");
+		game.controlsHintText.setPosition(SCREEN_WIDHTH - game.controlsHintText.getGlobalBounds().width - 20.f, 10.f);
+
+		game.gameOverText.setFont(game.font);
+		game.gameOverText.setCharacterSize(100);
+		game.gameOverText.setFillColor(sf::Color::White);
+		game.gameOverText.setPosition(SCREEN_WIDHTH / 2.f - 200.f, SCREEN_HEIGHT / 2.f - 50.f);
+		game.gameOverText.setString("Game Over");
+
+		game.gameOverScoreText.setFont(game.font);
+		game.gameOverScoreText.setCharacterSize(30);
+		game.gameOverScoreText.setFillColor(sf::Color::White);
+		game.gameOverScoreText.setString("Your score: " + std::to_string(game.numEatenApples));
+		game.gameOverScoreText.setPosition(SCREEN_WIDHTH / 2.f - game.controlsHintText.getGlobalBounds().width / 4.f, SCREEN_HEIGHT / 2.f + 50.f);
+
 		StartPlayingState(game);
-		//RestartGame(game);
 	}
+
+			
+		void StartGameoverState(Game& game)
+		
+		{
+			game.isGameFinished = true;
+			game.gameFinishTime = 0.f;
+			game.DeathSound.play();
+			
+		}
+
+		void UpdateGameoverState(Game& game, float deltaTime)
+		{
+			if (game.gameFinishTime <= PAUSE_LENGTH)
+			{
+				game.gameFinishTime += deltaTime;
+				game.background.setFillColor(sf::Color::Red);
+			}
+			else
+			{
+				// Reset backgound
+				game.background.setFillColor(sf::Color::Black);
+
+				StartPlayingState(game);
+			}
+		}
+		
+
+		void drawGame(Game& game, RenderWindow& window)
+		{
+			window.draw(game.background);
+			DrawPlayer(game.player, window);
+
+			for (int i = 0; i < NUM_APPLES; ++i)
+			{
+				DrawApples(game.apples[i], window);
+			}
+
+			for (int i = 0; i < ROCKS_NUM; ++i)
+			{
+				DrawRocks(game.rocks[i], window);
+			}
+			window.draw(game.player.sprite);
+			
+	
+			if (!game.isGameFinished)
+			{
+				window.draw(game.scoreText);
+				window.draw(game.controlsHintText);
+			}
+			else
+			{
+				window.draw(game.gameOverText);
+				window.draw(game.gameOverScoreText);
+			}
+		}
+
+		void DeinitializeGame(Game& game)
+		{};
+		
+	
+	}
+	
+
 
 	/**void GameUpdate(Game& game, float deltaTime)
 	{
@@ -151,115 +247,3 @@ namespace ApplesGame
 			}
 
 		}/**/
-
-
-		void StartPlayingState(Game& game)
-		{
-			SetPlayerPosition(game.player, { SCREEN_WIDHTH / 2.f, SCREEN_HEIGHT / 2.f });
-			SetPlayerSpeed(game.player, INITIAL_SPEED);
-			SetPlayerDirection(game.player, PlayerDirection::Right);
-		}
-
-		void UpdatePlayingState(Game& game, float deltaTime)
-		{
-			// Handle input
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-			{
-				SetPlayerDirection(game.player, PlayerDirection::Right);
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-			{
-				SetPlayerDirection(game.player, PlayerDirection::Up);
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-			{
-				SetPlayerDirection(game.player, PlayerDirection::Left);
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-			{
-				SetPlayerDirection(game.player, PlayerDirection::Down);
-			}
-
-			UpdatePlayer(game.player, deltaTime);
-
-			// Find player collisions with apples
-			for (int i = 0; i < NUM_APPLES; ++i)
-			{
-				if (DoShapesCollide(GetPlayerCollider(game.player), GetAppleCollider(game.apples[i])))
-				{
-					SetApplesPosition(game.apples[i], GetRandPositionInRectangle(game.screenRect));
-					++game.numEatenApples;
-					SetPlayerSpeed(game.player, GetPlayerSpeed(game.player) + ACCELERATION);
-					game.ApplesEatSound.play();
-					
-			}
-
-			// Find player collisions with rocks
-			for (int i = 0; i < ROCKS_NUM; ++i)
-			{
-				if (DoShapesCollide(GetPlayerCollider(game.player), GetRocksCollider(game.rocks[i])))
-				{
-					StartGameoverState(game);
-				}
-			}
-
-			// Check screen borders collision
-			if (!DoShapesCollide(GetPlayerCollider(game.player), game.screenRect))
-			{
-				StartGameoverState(game);
-			}
-		}
-
-		}
-
-		void StartGameoverState(Game& game)
-		
-		
-		{
-			game.isGameFinished = true;
-			game.gameFinishTime = 0.f;
-			game.DeathSound.play();
-			
-		}
-
-		void UpdateGameoverState(Game& game, float deltaTime)
-		{
-			if (game.gameFinishTime <= PAUSE_LENGTH)
-			{
-				game.gameFinishTime += deltaTime;
-				game.background.setFillColor(sf::Color::Red);
-			}
-			else
-			{
-				// Reset backgound
-				game.background.setFillColor(sf::Color::Black);
-
-				StartPlayingState(game);
-			}
-		}
-		
-
-		void drawGame(Game& game, RenderWindow& window)
-		{
-			window.draw(game.background);
-			DrawPlayer(game.player, window);
-
-			for (int i = 0; i < NUM_APPLES; ++i)
-			{
-				DrawApples(game.apples[i], window);
-			}
-
-			for (int i = 0; i < ROCKS_NUM; ++i)
-			{
-				DrawRocks(game.rocks[i], window);
-			}
-			window.draw(game.player.sprite);
-		}
-
-		void DeinitializeGame(Game& game)
-		{
-		}
-			
-		
-	
-	}

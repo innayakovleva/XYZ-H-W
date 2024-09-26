@@ -32,21 +32,29 @@ struct Game
 	Texture rocksTexture;
 	SoundBuffer eatApplesSoundBuffer;
 	SoundBuffer gameOverSoundBuffer;
+
+	Font font;
+	Text scoreText;
+	Text controlsHintText;
+	Text gameOverText;
+	Text gameOverScoreText;
 };
 
 
-void InitGame(Game& game);
-void RestartGame(Game& game);
-void GameUpdate(Game& game, float deltaTime);
-void drawGame(Game& game,RenderWindow& window);
+void InitGame(Game& game);;
+void RestartGame(Game& game);;
+void GameUpdate(Game& game, float deltaTime);;
+void drawGame(Game& game, RenderWindow& window);;
 
 
-void DeinitializeGame(Game& game);
+void DeinitializeGame(Game& game);;
 
 
-void StartPlayingState(Game& game);
-void UpdatePlayingState(Game& game, float deltaTime);
+void StartPlayingState(Game& game);;
+void UpdatePlayingState(Game& game, float deltaTime);;
 
-void StartGameoverState(Game& game);
-void UpdateGameoverState(Game& game, float deltaTime);
+void StartGameoverState(Game& game);;
+void UpdateGameoverState(Game& game, float deltaTime);;
 }
+
+
