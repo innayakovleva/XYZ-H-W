@@ -9,10 +9,9 @@
 
 namespace ApplesGame
 {
-
-
 struct Game
 {
+	Rectangle screenRect;
 	Player player;
 	Apples apples[NUM_APPLES];
 	Rocks rocks[ROCKS_NUM];
@@ -25,15 +24,29 @@ struct Game
 	bool isAppleEeaten = false;
 	float timeSinceGameFinished = 0;
 
+	Sound ApplesEatSound;
+	Sound DeathSound;
+
 	Texture playerTexture;
 	Texture applesTexture;
 	Texture rocksTexture;
+	SoundBuffer eatApplesSoundBuffer;
+	SoundBuffer gameOverSoundBuffer;
 };
 
-void RestartGame(Game& game);;
+
 void InitGame(Game& game);
+void RestartGame(Game& game);
 void GameUpdate(Game& game, float deltaTime);
-void drawGame(Game& game, RenderWindow& window);
-void DeinitializeGame(Game& game)
-{}
+void drawGame(Game& game,RenderWindow& window);
+
+
+void DeinitializeGame(Game& game);
+
+
+void StartPlayingState(Game& game);
+void UpdatePlayingState(Game& game, float deltaTime);
+
+void StartGameoverState(Game& game);
+void UpdateGameoverState(Game& game, float deltaTime);
 }

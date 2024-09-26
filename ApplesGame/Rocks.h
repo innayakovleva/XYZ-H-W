@@ -15,6 +15,7 @@ namespace ApplesGame
 		Position2D Position;
 		Sprite sprite;
 	};
-	void InitRocks(Rocks& rocks);;
+	void InitRocks(Rocks& rocks,const Game& game);
+	Rectangle GetRocksCollider(const Rocks& rock);
 	void DrawRocks(Rocks& rocks, RenderWindow& window);
 }

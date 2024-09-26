@@ -1,12 +1,10 @@
 ﻿  Apples.cpp
+C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\Apples.h(20,33): error C4430: отсутствует спецификатор типа - предполагается int. Примечание. C++ не поддерживает int по умолчанию
+C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\Apples.h(20,43): error C2143: синтаксическая ошибка: отсутствие "," перед "&"
   Game.cpp
   GameMain.cpp
-C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\Game.cpp(91,19): error C2039: "Shape": не является членом "ApplesGame::Apples".
-C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\Game.cpp(92,31): error C2039: "Shape": не является членом "ApplesGame::Apples".
-C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\Game.cpp(97,18): error C2039: "Shape": не является членом "ApplesGame::Rocks".
-C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\Game.cpp(98,30): error C2039: "Shape": не является членом "ApplesGame::Rocks".
-C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\GameMain.cpp(30,18): error C2371: playerDirection: переопределение; различные базовые типы
-  Math.cpp
   Player.cpp
   Rocks.cpp
+C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\Rocks.h(18,30): error C4430: отсутствует спецификатор типа - предполагается int. Примечание. C++ не поддерживает int по умолчанию
+C:\XYZ\xyz-cpp-course-template-latest\ApplesGame\Rocks.h(18,40): error C2143: синтаксическая ошибка: отсутствие "," перед "&"
   Создание кода...

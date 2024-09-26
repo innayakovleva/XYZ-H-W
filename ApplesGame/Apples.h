@@ -2,6 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include "Math.h"
 #include "Constants.h"
+
+
 using namespace std;
 using namespace sf;
 namespace ApplesGame
@@ -14,6 +16,9 @@ namespace ApplesGame
 		//CircleShape Shape;
 		Sprite sprite;
 	};
-	void InitApples(Apples& apples);;
-	void DrawApples(Apples& apples, RenderWindow& window);
+
+	void InitApples(Apples& apples,const Game& game);
+	void DrawApples(Apples& apples,RenderWindow& GetRandPositionInRectanglewindow);
+	void SetApplesPosition(Apples& apples,const Position2D& position);
+	Circle GetAppleCollider(const Apples& apple);
 }
